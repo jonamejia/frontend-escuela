@@ -7,19 +7,20 @@ import {
   FormControl,
   Input,
   FormLabel,
+  Select,
   Button,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
 export default function Login() {
 
-    const [userEmail, setUserText] = useState('');
-    const textValue = ({ target }) => {
-        setUserText(target.value);
-        console.log(target.value)
-    }
+  const [userEmail, setUserText] = useState('');
+  const textValue = ({ target }) => {
+    setUserText(target.value);
+    console.log(target.value)
+  }
 
-    
+
   return (
     <Box
       w={["full", "md"]}
@@ -38,12 +39,21 @@ export default function Login() {
 
         <FormControl>
           <FormLabel>Usuario:</FormLabel>
-          <Input rounded="none" variant="filled" value={userEmail} onChange={textValue}/>
+          <Input rounded="none" variant="filled" value={userEmail} onChange={textValue} />
         </FormControl>
 
         <FormControl>
           <FormLabel>Contraseña:</FormLabel>
           <Input rounded="none" variant="filled" type="password" />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Rol</FormLabel>
+          <Select placeholder='Select rol'>
+            <option>Administracion</option>
+            <option>Docentes</option>
+            <option>Alumnos</option>
+          </Select>
         </FormControl>
 
         <Button rounded="none" colorScheme="blue" w='full' >
