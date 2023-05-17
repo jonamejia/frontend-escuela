@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -14,7 +14,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-export default function Resgistrar() {
+export default function Resgistrar({children}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = React.useRef(null);
@@ -22,7 +22,7 @@ export default function Resgistrar() {
 
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <Button onClick={onOpen}>{children}</Button>
 
       <Modal
         initialFocusRef={initialRef}
@@ -51,7 +51,7 @@ export default function Resgistrar() {
             </FormControl>
 
             <FormControl>
-              <FormLabel>Segundo Apellido: </FormLabel>
+              <FormLabel>Segundo Apellido</FormLabel>
               <Input />
             </FormControl>
           </ModalBody>

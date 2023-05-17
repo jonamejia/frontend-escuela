@@ -32,13 +32,14 @@ import {
 } from "react-icons/fi";
 
 import Registro from "./Registro";
+import Tablas from "./Tablas";
 
 const LinkItems = [
   { name: "Inicio", icon: FiHome },
   { name: "Alumnos", icon: FiUsers },
   { name: "Maestros", icon: FiUser },
   { name: "Cursos", icon: FiStar },
-  { name: "Horaios", icon: FiClock },
+  { name: "Horarios", icon: FiClock },
 ];
 
 export default function SidebarWithHeader({ children }) {
@@ -66,6 +67,10 @@ export default function SidebarWithHeader({ children }) {
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
+        {/* Agregar el espacio en blanco */}
+        <Registro>Nuevo Usuario</Registro>
+        <Registro>Editar Usuario</Registro>
+        <Tablas />
       </Box>
     </Box>
   );
@@ -152,7 +157,6 @@ const MobileNav = ({ onOpen, ...rest }) => {
       justifyContent={{ base: "space-between", md: "flex-end" }}
       {...rest}
     >
-        
       <IconButton
         display={{ base: "flex", md: "none" }}
         onClick={onOpen}
@@ -204,7 +208,6 @@ const MobileNav = ({ onOpen, ...rest }) => {
                 </VStack>
                 <Box display={{ base: "none", md: "flex" }}>
                   <FiChevronDown />
-                  
                 </Box>
               </HStack>
             </MenuButton>
@@ -219,10 +222,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
               <MenuItem>Sign out</MenuItem>
             </MenuList>
           </Menu>
-          
         </Flex>
       </HStack>
-      <Registro/>
     </Flex>
   );
 };
