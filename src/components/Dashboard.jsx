@@ -1,4 +1,7 @@
 import React from "react";
+import Registro from "./Registro";
+import Tablas from "./Tablas";
+import Clas from "./pages/Classmate";
 import {
   IconButton,
   Avatar,
@@ -30,9 +33,7 @@ import {
   FiUsers,
   FiUser,
 } from "react-icons/fi";
-
-import Registro from "./Registro";
-import Tablas from "./Tablas";
+import HomeOption from "./pages/Home";
 
 const LinkItems = [
   { name: "Inicio", icon: FiHome },
@@ -65,12 +66,13 @@ export default function SidebarWithHeader({ children }) {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <Box ml={{ base: 0, md: 60 }} p="4" bg={"blackAlpha.100"} borderRadius={"10 px"}>
         {children}
         {/* Agregar el espacio en blanco */}
         <Registro>Nuevo Usuario</Registro>
         <Registro>Editar Usuario</Registro>
-        <Tablas />
+        {/*<HomeOption/>*/}
+        <Clas/>
       </Box>
     </Box>
   );
