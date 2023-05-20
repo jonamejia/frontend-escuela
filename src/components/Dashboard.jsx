@@ -71,8 +71,8 @@ export default function SidebarWithHeader({ children }) {
         {/* Agregar el espacio en blanco */}
         <Registro>Nuevo Usuario</Registro>
         <Registro>Editar Usuario</Registro>
-        {/*<HomeOption/>*/}
-        <Clas/>
+        <HomeOption/>
+        
       </Box>
     </Box>
   );
