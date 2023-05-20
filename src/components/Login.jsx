@@ -14,12 +14,20 @@ import { useState } from "react";
 
 export default function Login() {
 
-  const [userEmail, setUserText] = useState('');
-  const textValue = ({ target }) => {
-    setUserText(target.value);
-    console.log(target.value)
-  }
+  const [login, setLogin] = useState({
+    usuario: "",
+    pass: "",
+  });
 
+  const handleChange = (e) => {
+    setLogin({ ...login, [e.target.name]: e.target.value });
+    console.log(login.usuario);
+    console.log(login.pass);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+  }
 
   return (
     <Box
@@ -31,7 +39,7 @@ export default function Login() {
       borderColor={["", "gray.300"]}
       borderRadius={10}
     >
-      <VStack spacing={4} align={"flex-start"} w="full">
+      <VStack as="form" spacing={4} align={"flex-start"} w="full" onSubmit={handleSubmit}>
         <VStack spacing={1} align={["flex-start", "center"]} w="full">
           <Heading>Login</Heading>
           <Text>Ingrese su usuario y contraseña </Text>
@@ -39,24 +47,26 @@ export default function Login() {
 
         <FormControl>
           <FormLabel>Usuario:</FormLabel>
-          <Input rounded="none" variant="filled" value={userEmail} onChange={textValue} />
+          <Input
+            rounded="none"
+            variant="filled"
+            name="usuario"
+            onChange={handleChange}
+          />
         </FormControl>
 
         <FormControl>
           <FormLabel>Contraseña:</FormLabel>
-          <Input rounded="none" variant="filled" type="password" />
+          <Input
+            rounded="none"
+            variant="filled"
+            type="password"
+            name="pass"
+            onChange={handleChange}
+          />
         </FormControl>
 
-        <FormControl>
-          <FormLabel>Rol</FormLabel>
-          <Select placeholder='Select rol'>
-            <option>Administracion</option>
-            <option>Docentes</option>
-            <option>Alumnos</option>
-          </Select>
-        </FormControl>
-
-        <Button rounded="none" colorScheme="blue" w='full' >
+        <Button type="submit" rounded="none" colorScheme="blue" w="full">
           Login
         </Button>
       </VStack>
