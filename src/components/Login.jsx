@@ -11,9 +11,9 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import axios from "axios";
 
 export default function Login() {
-
   const [login, setLogin] = useState({
     usuario: "",
     pass: "",
@@ -21,13 +21,21 @@ export default function Login() {
 
   const handleChange = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
-    console.log(login.usuario);
-    console.log(login.pass);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  }
+
+    const res = await axios.get("http://localhost:3000/usuario");
+    const data = JSON.parse(res.request.response);
+
+    const usuarios = data.map((user) => {
+      const { usuario, pass } = user;
+      if (usuario === login.usuario && pass === login.pass) {
+        console.log(usuario === login.usuario && pass === login.pass);
+      }
+    });
+  };
 
   return (
     <Box
@@ -39,7 +47,13 @@ export default function Login() {
       borderColor={["", "gray.300"]}
       borderRadius={10}
     >
-      <VStack as="form" spacing={4} align={"flex-start"} w="full" onSubmit={handleSubmit}>
+      <VStack
+        as="form"
+        spacing={4}
+        align={"flex-start"}
+        w="full"
+        onSubmit={handleSubmit}
+      >
         <VStack spacing={1} align={["flex-start", "center"]} w="full">
           <Heading>Login</Heading>
           <Text>Ingrese su usuario y contraseña </Text>
