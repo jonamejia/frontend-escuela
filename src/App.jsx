@@ -1,17 +1,19 @@
 import "./App.css";
 import React from "react";
 import Login from "../src/components/Login";
-import Dashboard from "../src/components/Dashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Card from "./components/CardMasters";
+import SidebarAdmin from "./components/DashboardAdmin";
+import SidebarAlumno from "./components/DashboardAlumno";
+import SidebarDocente from "./components/DashboardDocente";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/card" element={<Card />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/admin" element={<SidebarAdmin />} />
+        <Route path="/alumno" element={<SidebarAlumno />} />
+        <Route path="/docente" element={<SidebarDocente />} />
       </Routes>
     </BrowserRouter>
   );

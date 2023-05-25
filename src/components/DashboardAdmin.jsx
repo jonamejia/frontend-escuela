@@ -1,7 +1,6 @@
 import React from "react";
 import Registro from "./Registro";
 import Tablas from "./Tablas";
-import Clas from "./pages/Classmate";
 import {
   IconButton,
   Avatar,
@@ -33,17 +32,16 @@ import {
   FiUsers,
   FiUser,
 } from "react-icons/fi";
-import HomeOption from "./pages/Home";
+import HomeAdmin from "./pages/HomeAdmin";
 
 const LinkItems = [
-  { name: "Inicio", icon: FiHome },
   { name: "Alumnos", icon: FiUsers },
   { name: "Maestros", icon: FiUser },
   { name: "Cursos", icon: FiStar },
   { name: "Horarios", icon: FiClock },
 ];
 
-export default function SidebarWithHeader({ children }) {
+export default function SidebarAdmin() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
@@ -66,13 +64,8 @@ export default function SidebarWithHeader({ children }) {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4" bg={"blackAlpha.100"} borderRadius={"10 px"}>
-        {children}
-        {/* Agregar el espacio en blanco */}
-        <Registro>Nuevo Usuario</Registro>
-        <Registro>Editar Usuario</Registro>
-        <HomeOption/>
-        
+      <Box margin={"10px"}>
+        <HomeAdmin />
       </Box>
     </Box>
   );
@@ -194,7 +187,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                 <Avatar
                   size={"sm"}
                   src={
-                    "https://scontent.fmga4-1.fna.fbcdn.net/v/t39.30808-6/339768057_986791312705501_7433163998881671241_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=hdRIIHukiG0AX_C0x-V&_nc_ht=scontent.fmga4-1.fna&oh=00_AfBcdZNzXgnNK6K-gkgwUvbPJdWQ-T7AoZMil_D5CVkQmg&oe=64620574"
+                    ""
                   }
                 />
                 <VStack
@@ -217,11 +210,10 @@ const MobileNav = ({ onOpen, ...rest }) => {
               bg={useColorModeValue("white", "gray.900")}
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
+              <MenuItem>Perfil</MenuItem>
+              <MenuItem>Configuracion</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem>Cerrar Sesion</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

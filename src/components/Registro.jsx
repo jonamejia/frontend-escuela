@@ -15,7 +15,6 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
-import Alertas from "./Alertas";
 
 export default function Resgistrar({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
