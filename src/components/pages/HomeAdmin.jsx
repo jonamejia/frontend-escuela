@@ -17,7 +17,7 @@ import TableAlumno from "./GestionAlumno";
 export default function HomeAdmin() {
     return (
         <Stack minH={"100%"} direction={{ base: "column", md: "row" }}>
-            <Flex p={10} m={5} flex={1} align={"center"} justify={"center"}>
+            <Flex p={10} m={5} flex={"auto"} align={"center"} justify={"center"}>
                 <Stack spacing={6} w={"full"} maxW={"lg"}>
                     <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
                         <Text

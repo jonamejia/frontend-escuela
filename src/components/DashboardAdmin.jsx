@@ -34,12 +34,15 @@ import {
 } from "react-icons/fi";
 import HomeAdmin from "./pages/HomeAdmin";
 
+
 const LinkItems = [
   { name: "Alumnos", icon: FiUsers },
   { name: "Maestros", icon: FiUser },
   { name: "Cursos", icon: FiStar },
   { name: "Horarios", icon: FiClock },
 ];
+
+
 
 export default function SidebarAdmin() {
   const { isOpen, onOpen, onClose } = useDisclosure();
