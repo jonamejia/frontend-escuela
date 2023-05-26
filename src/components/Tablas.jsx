@@ -11,7 +11,7 @@ import {
 export default function Tablas() {
   return (
     <TableContainer mt={5}>
-      <Table variant="simple">
+      <Table variant="simple" borderBlock={"gray"}>
         <Thead>
           <Tr>
             <Th>Alumno</Th>

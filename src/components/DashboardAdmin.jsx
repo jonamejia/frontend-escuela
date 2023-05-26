@@ -62,10 +62,19 @@ export default function SidebarAdmin() {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box margin={"10px"}>
-        <HomeAdmin />
+      <Box>
+        <Flex
+          direction={"column"}
+          alignContent={"space-between"}
+          justifyContent={"normal"}
+          p={10}
+          margin={20}
+          mx={"auto"}
+          maxW={"180vh"}
+        >
+          <HomeAdmin />
+        </Flex>
       </Box>
     </Box>
   );

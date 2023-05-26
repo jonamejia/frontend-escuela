@@ -1,4 +1,6 @@
 import React from "react";
+import {Link as RouterLink} from 'react-router-dom';
+
 import {
     Button,
     Flex,
@@ -8,6 +10,9 @@ import {
     Text,
     useBreakpointValue
 } from "@chakra-ui/react"
+import TableAlumno from "./GestionAlumno";
+
+
 
 export default function HomeAdmin() {
     return (
@@ -36,7 +41,7 @@ export default function HomeAdmin() {
                             Administracion
                         </Text>{" "}
                     </Heading>
-                    <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
+                    <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.700"}>
                         Gestione a sus docentes y alumnos de manera comoda, eficiente y rapida
                     </Text>
                     <Stack direction={{ base: "column", md: "row" }} spacing={4}>
@@ -48,19 +53,20 @@ export default function HomeAdmin() {
                                 bg: "blue.500"
                             }}
                         >
-                            Gestionar Alumnos 
+                            <RouterLink to="/tablealumno">Gestionar Alumnos</RouterLink>
                         </Button>
                         <Button rounded={"full"}
-                        bg={"blue.400"}
-                        color={"white"}
-                        _hover={{
-                            bg: "blue.500"
-                        }}>Gestionar Docentes</Button>
+                            bg={"blue.400"}
+                            color={"white"}
+                            _hover={{
+                                bg: "blue.500"
+                            }}>Gestionar Docentes</Button>
                     </Stack>
                 </Stack>
             </Flex>
             <Flex flex={1}>
                 <Image
+                    borderRadius={"8px"}
                     alt={"Login Image"}
                     objectFit={"cover"}
                     src={
@@ -69,5 +75,7 @@ export default function HomeAdmin() {
                 />
             </Flex>
         </Stack>
+
+
     )
 }
