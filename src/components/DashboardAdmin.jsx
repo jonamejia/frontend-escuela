@@ -1,5 +1,4 @@
 import React from "react";
-import Registro from "./RegistroAlumno";
 import Tablas from "./TablasAlumnos";
 import {
   IconButton,
@@ -33,6 +32,7 @@ import {
   FiUser,
 } from "react-icons/fi";
 import HomeAdmin from "./pages/HomeAdmin";
+import { useNavigate } from "react-router-dom";
 
 
 const LinkItems = [
