@@ -23,10 +23,10 @@ export default function Resgistrar({ children }) {
   const finalRef = React.useRef(null);
 
   const [datos, setDatos] = useState({
-    primerNombre: "",
-    segundoNombre: "",
-    primerApellido: "",
-    segundoApellido: "",
+    nombre_alumno: "",
+    apellido_alumno: "",
+    fecha_nacimiento: "",
+    direccion: "",
   });
 
   //setear los datos que se agreguen a los inputs
@@ -36,11 +36,11 @@ export default function Resgistrar({ children }) {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const res = await axios.post("http://localhost:3000/usuario", {
-      primerNombre: datos.primerNombre,
-      segundoNombre: datos.segundoNombre,
-      primerApellido: datos.primerApellido,
-      segundoApellido: datos.segundoApellido,
+    const res = await axios.post("http://localhost:3000/alumno", {
+      nombre_alumno: datos.nombre_alumno,
+      apellido_alumno: datos.apellido_alumno,
+      fecha_nacimiento: datos.fecha_nacimiento,
+      direccion: datos.direccion
     });
 
   };
@@ -61,27 +61,27 @@ export default function Resgistrar({ children }) {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel>Primer Nombre: </FormLabel>
+              <FormLabel>Nombre: </FormLabel>
               <Input
                 ref={initialRef}
-                name="primerNombre"
+                name="nombre_alumno"
                 onChange={handleChange}
               />
             </FormControl>
 
             <FormControl>
-              <FormLabel>Segundo Nombre: </FormLabel>
-              <Input name="segundoNombre" onChange={handleChange} />
+              <FormLabel>Apellido: </FormLabel>
+              <Input name="apellido_alumno" onChange={handleChange} />
             </FormControl>
 
             <FormControl>
-              <FormLabel>Primer Apellido: </FormLabel>
-              <Input name="primerApellido" onChange={handleChange} />
+              <FormLabel>Fecha nacimiento: </FormLabel>
+              <Input name="fecha_nacimiento" onChange={handleChange} />
             </FormControl>
 
             <FormControl>
-              <FormLabel>Segundo Apellido</FormLabel>
-              <Input name="segundoApellido" onChange={handleChange} />
+              <FormLabel>Direccion</FormLabel>
+              <Input name="direccion" onChange={handleChange} />
             </FormControl>
           </ModalBody>
 

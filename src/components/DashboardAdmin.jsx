@@ -1,6 +1,6 @@
 import React from "react";
-import Registro from "./Registro";
-import Tablas from "./Tablas";
+import Registro from "./RegistroAlumno";
+import Tablas from "./TablasAlumnos";
 import {
   IconButton,
   Avatar,

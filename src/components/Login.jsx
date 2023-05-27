@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [login, setLogin] = useState({
-    usuario: "",
+    username: "",
     pass: "",
   });
 
@@ -29,26 +29,28 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await axios.get("http://localhost:3000/usuario");
+    const res = await axios.get("http://localhost:3000/login");
     const data = JSON.parse(res.request.response);
 
     const usuarios = data.some((user) => {
-      const { usuario, pass, tipo_usuario } = user;
-      if (usuario === login.usuario && pass === login.pass) {
-        if (tipo_usuario === "admin") {
-          return navigate("/admin");
-        } else if (tipo_usuario === "docente") {
-          return navigate("/docente");
-        } else if (tipo_usuario === "estudiante") {
-          return navigate("/alumno");
+      const { username, pass, tipo_usuario } = user;
+ 
+      if (username == login.username && pass == login.pass) {
+        if (tipo_usuario == "admin") {
+           navigate("/admin");
+        } else if (tipo_usuario == "docente") {
+          navigate("/docente");
+        } else if (tipo_usuario == "estudiante") {
+           navigate("/alumno");
         }
+
+        return true;
       }
     });
-    if (usuarios) {
-      console.log("logeado");
-    } else {
-      alert("Usuario y contraseña incorrecta");
-    }
+
+    if (!usuarios) {
+      alert("Usuario o contraseña incorrecta")
+    } 
   };
 
   return (
@@ -78,7 +80,7 @@ export default function Login() {
           <Input
             rounded="none"
             variant="filled"
-            name="usuario"
+            name="username"
             onChange={handleChange}
           />
         </FormControl>

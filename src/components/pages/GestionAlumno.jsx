@@ -1,5 +1,6 @@
 import React from "react";
-import Tablas from "../Tablas";
+import Tablas from "../TablasAlumnos";
+import Registro from "../RegistroAlumno";
 import {
     IconButton,
     Avatar,
@@ -63,13 +64,17 @@ export default function TableAlumno() {
             </Drawer>
             <MobileNav onOpen={onOpen} />
             <Box minHeight={"100%"}>
+                
                 <Flex
                     alignItems={"center"}
+                    direction={"column"}
                     justifyContent={"center"}
                     padding={"10px"}
                     maxWidth={"150vh"}
                 >
+                    <Registro>Insertar</Registro>
                     <Tablas />
+                    
                 </Flex>
 
             </Box>
