@@ -6,26 +6,18 @@ import {
   Th,
   Td,
   TableContainer,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   Button,
-  FormControl,
-  FormLabel,
-  Input,
-  useDisclosure,
-  Stack
+  Flex
 } from "@chakra-ui/react";
+
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ModalForm from "./ModalForm";
 
 export default function Tablas() {
   const [alumnos, setAlumnos] = useState([]);
+
   //setear los datos que se agreguen a los inputs
   const handleChange = (e) => {
     setDatos({ ...datos, [e.target.name]: e.target.value });
@@ -44,31 +36,27 @@ export default function Tablas() {
 
   const obtenerAlumno = async () => {
     const res = await axios.get("http://localhost:3000/alumno");
-    const data = JSON.parse(res.request.response);
+    const data = res.data;
     setAlumnos(data);
   };
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
-
-  async function handleClick(e) {
-
+  const handleClick = async (e) => {
+    e.preventDefault();
+    const values = {
+      nombre_alumno: datos.nombre_alumno,
+      apellido_alumno: datos.apellido_alumno,
+      fecha_nacimiento: datos.fecha_nacimiento,
+      direccion: datos.direccion,
+    };
 
     try {
-      const res = await axios.post("http://localhost:3000/alumno", {
-        nombre_alumno: datos.nombre_alumno,
-        apellido_alumno: datos.apellido_alumno,
-        fecha_nacimiento: datos.fecha_nacimiento,
-        direccion: datos.direccion
-      })
+      const response = await axios.post("http://localhost:3000/alumno", values);
+      console.log(response.data);
+      obtenerAlumno();
     } catch (error) {
       console.log("Error al insertar", error);
     }
   };
-
-  obtenerAlumno();
 
   const eliminarAlumno = async (id) => {
     try {
@@ -85,59 +73,14 @@ export default function Tablas() {
   }, []);
 
   return (
-    <>
-
-      <Button onClick={onOpen} colorScheme="blue">
-        Insertar Alumno
-      </Button>
-
-      <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
+    <Flex direction={"column"} align={"center"} justify={"center"} >
+      <ModalForm
+        handleSubmit={handleClick}
+        handleChangeData={handleChange}
+        content="Registrar Alumno"
       >
-        <ModalOverlay />
-        <form onSubmit={handleClick}>
-          <ModalContent>
-            <ModalHeader>Registrar alumno</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody pb={6}>
-              <FormControl>
-                <FormLabel>Nombre: </FormLabel>
-                <Input
-                  ref={initialRef}
-                  name="nombre_alumno"
-                  onChange={handleChange}
-                />
-              </FormControl>
-
-              <FormControl>
-                <FormLabel>Apellido: </FormLabel>
-                <Input name="apellido_alumno" onChange={handleChange} />
-              </FormControl>
-
-              <FormControl>
-                <FormLabel>Fecha nacimiento: </FormLabel>
-                <Input name="fecha_nacimiento" onChange={handleChange} />
-              </FormControl>
-
-              <FormControl>
-                <FormLabel>Direccion</FormLabel>
-                <Input name="direccion" onChange={handleChange} />
-              </FormControl>
-            </ModalBody>
-
-            <ModalFooter>
-              <Button type="submit" colorScheme="blue" mr={3}>
-                Guardar
-              </Button>
-              <Button onClick={onClose}>Cancelar</Button>
-            </ModalFooter>
-          </ModalContent>
-        </form>
-      </Modal>
-
+        Insertar Alumno
+      </ModalForm>
       <TableContainer>
         <Table variant="striped" colorScheme={"teal"}>
           <Thead>
@@ -185,12 +128,6 @@ export default function Tablas() {
           </Tbody>
         </Table>
       </TableContainer>
-    </>
-  )
+    </Flex>
+  );
 }
-
-
-
-
-
-
