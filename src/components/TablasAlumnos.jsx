@@ -18,6 +18,7 @@ import {
   FormLabel,
   Input,
   useDisclosure,
+  Stack
 } from "@chakra-ui/react";
 import React from "react";
 import { useState, useEffect } from "react";
@@ -40,6 +41,7 @@ export default function Tablas() {
     const res = await axios.get("http://localhost:3000/alumno");
     const data = JSON.parse(res.request.response);
     setAlumnos(data);
+    console.log(alumnos);
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -47,8 +49,8 @@ export default function Tablas() {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
-  async  function handleClick  (e) {
-    
+  async function handleClick(e) {
+
 
     try {
       const res = await axios.post("http://localhost:3000/alumno", {
@@ -62,11 +64,8 @@ export default function Tablas() {
     }
 
     obtenerAlumno();
-  } 
-    
-      
-  
-  
+  }
+
   const eliminarAlumno = async (id) => {
     try {
       console.log(id);
@@ -83,9 +82,16 @@ export default function Tablas() {
 
   return (
     <>
-      <Button onClick={onOpen} colorScheme="blue">
-        Insertar Alumno
-      </Button>
+      <Stack direction={{ base: "column", md: "row" }} spacing={4}>
+        <Button onClick={onOpen} colorScheme="blue">
+          Insertar Alumno
+        </Button>
+
+        <Button onClick={onOpen} colorScheme="blue">
+          Agregar Asignacion
+        </Button>
+      </Stack>
+
 
       <Modal
         initialFocusRef={initialRef}

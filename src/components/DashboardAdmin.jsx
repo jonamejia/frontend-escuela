@@ -1,5 +1,5 @@
 import React from "react";
-import Tablas from "./TablasAlumnos";
+import { useNavigate } from "react-router-dom";
 import {
   IconButton,
   Avatar,
@@ -32,8 +32,6 @@ import {
   FiUser,
 } from "react-icons/fi";
 import HomeAdmin from "./pages/HomeAdmin";
-import { useNavigate } from "react-router-dom";
-
 
 const LinkItems = [
   { name: "Alumnos", icon: FiUsers },
@@ -41,8 +39,6 @@ const LinkItems = [
   { name: "Cursos", icon: FiStar },
   { name: "Horarios", icon: FiClock },
 ];
-
-
 
 export default function SidebarAdmin() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -66,24 +62,17 @@ export default function SidebarAdmin() {
         </DrawerContent>
       </Drawer>
       <MobileNav onOpen={onOpen} />
-      <Box>
-        <Flex
-          direction={"column"}
-          alignContent={"space-between"}
-          justifyContent={"normal"}
-          p={10}
-          margin={20}
-          mx={"auto"}
-          maxW={"180vh"}
-        >
+      <Flex ml={{ base: 0, md: 60 }} p={{ base: 5, md: 20 }} justifyContent="space-between">
+        <Box maxW="100%">
           <HomeAdmin />
-        </Flex>
-      </Box>
+        </Box>
+      </Flex>
     </Box>
   );
 }
 
 const SidebarContent = ({ onClose, ...rest }) => {
+
   return (
     <Box
       transition="3s ease"
@@ -116,11 +105,16 @@ const SidebarContent = ({ onClose, ...rest }) => {
 };
 
 const NavItem = ({ icon, children, ...rest }) => {
+  const navigate = useNavigate();
+
   return (
     <Link
-      href="#"
+      href=""
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
+      onClick={() => {
+        navigate(`/${children.toLowerCase()}`)
+      }}
     >
       <Flex
         align="center"

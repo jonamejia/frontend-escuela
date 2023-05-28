@@ -15,7 +15,7 @@ function App() {
         <Route path="/admin" element={<SidebarAdmin />} />
         <Route path="/alumno" element={<SidebarAlumno />} />
         <Route path="/docente" element={<SidebarDocente />} />
-        <Route path="/tablealumno" element={<TableAlumno/>} />
+        <Route path="/alumnos" element={<TableAlumno/>} />
       </Routes>
     </BrowserRouter>
   );

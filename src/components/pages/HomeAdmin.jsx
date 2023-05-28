@@ -1,6 +1,5 @@
 import React from "react";
 import {Link as RouterLink} from 'react-router-dom';
-
 import {
     Button,
     Flex,
@@ -10,9 +9,6 @@ import {
     Text,
     useBreakpointValue
 } from "@chakra-ui/react"
-import TableAlumno from "./GestionAlumno";
-
-
 
 export default function HomeAdmin() {
     return (
@@ -53,7 +49,7 @@ export default function HomeAdmin() {
                                 bg: "blue.500"
                             }}
                         >
-                            <RouterLink to="/tablealumno">Gestionar Alumnos</RouterLink>
+                            <RouterLink to="/Alumnos">Gestionar Alumnos</RouterLink>
                         </Button>
                         <Button rounded={"full"}
                             bg={"blue.400"}
@@ -75,7 +71,5 @@ export default function HomeAdmin() {
                 />
             </Flex>
         </Stack>
-
-
     )
 }

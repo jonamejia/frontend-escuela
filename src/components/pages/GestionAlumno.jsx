@@ -1,6 +1,5 @@
 import React from "react";
-import Tablas from "../TablasAlumnos";
-import Registro from "../RegistroAlumno";
+import { useNavigate } from "react-router-dom";
 import {
   IconButton,
   Avatar,
@@ -32,7 +31,7 @@ import {
   FiUsers,
   FiUser,
 } from "react-icons/fi";
-import { renderMatches } from "react-router-dom";
+import Tablas from "../TablasAlumnos";
 
 const LinkItems = [
   { name: "Alumnos", icon: FiUsers },
@@ -41,7 +40,7 @@ const LinkItems = [
   { name: "Horarios", icon: FiClock },
 ];
 
-export default function TableAlumno() {
+export default function SidebarAdmin() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
@@ -63,22 +62,17 @@ export default function TableAlumno() {
         </DrawerContent>
       </Drawer>
       <MobileNav onOpen={onOpen} />
-      <Box minHeight={"100%"}>
-        <Flex
-          alignItems={"center"}
-          direction={"column"}
-          justifyContent={"center"}
-          padding={"10px"}
-          minWidth={"150vh"}
-        >
+      <Flex ml={{ base: 0, md: 60 }} p={{ base: 5, md: 20 }} justifyContent="space-between">
+        <Box maxW="120%">
           <Tablas />
-        </Flex>
-      </Box>
+        </Box>
+      </Flex>
     </Box>
   );
 }
 
 const SidebarContent = ({ onClose, ...rest }) => {
+
   return (
     <Box
       transition="3s ease"
@@ -111,11 +105,16 @@ const SidebarContent = ({ onClose, ...rest }) => {
 };
 
 const NavItem = ({ icon, children, ...rest }) => {
+  const navigate = useNavigate();
+
   return (
     <Link
-      href="#"
+      href=""
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
+      onClick={() => {
+        navigate(`/${children.toLowerCase()}`)
+      }}
     >
       <Flex
         align="center"
@@ -191,7 +190,12 @@ const MobileNav = ({ onOpen, ...rest }) => {
               _focus={{ boxShadow: "none" }}
             >
               <HStack>
-                <Avatar size={"sm"} src={""} />
+                <Avatar
+                  size={"sm"}
+                  src={
+                    ""
+                  }
+                />
                 <VStack
                   display={{ base: "none", md: "flex" }}
                   alignItems="flex-start"
