@@ -1,6 +1,5 @@
 import React from "react";
 import Tablas from "../TablasAlumnos";
-import Registro from "../RegistroAlumno";
 import {
   IconButton,
   Avatar,
@@ -32,7 +31,6 @@ import {
   FiUsers,
   FiUser,
 } from "react-icons/fi";
-import { renderMatches } from "react-router-dom";
 
 const LinkItems = [
   { name: "Alumnos", icon: FiUsers },
