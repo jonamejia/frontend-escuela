@@ -62,7 +62,7 @@ export default function SidebarAdmin() {
         </DrawerContent>
       </Drawer>
       <MobileNav onOpen={onOpen} />
-      <Flex ml={{ base: 0, md: 60 }} p={{ base: 5, md: 20 }} justifyContent="space-between">
+      <Flex ml={{ base: 0, md: 60 }} p={{ base: 5, md: 20 }} justifyContent="center">
         <Box maxW="120%">
           <Tablas />
         </Box>

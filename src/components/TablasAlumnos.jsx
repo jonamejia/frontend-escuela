@@ -23,12 +23,17 @@ import {
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 export default function Tablas() {
   const [alumnos, setAlumnos] = useState([]);
   //setear los datos que se agreguen a los inputs
   const handleChange = (e) => {
     setDatos({ ...datos, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    console.log("Actualizado");
+  }, [alumnos]);
 
   const [datos, setDatos] = useState({
     nombre_alumno: "",
@@ -41,7 +46,6 @@ export default function Tablas() {
     const res = await axios.get("http://localhost:3000/alumno");
     const data = JSON.parse(res.request.response);
     setAlumnos(data);
-    console.log(alumnos);
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -60,11 +64,11 @@ export default function Tablas() {
         direccion: datos.direccion
       })
     } catch (error) {
-      console.log("Error al insertar", error)
+      console.log("Error al insertar", error);
     }
+  };
 
-    obtenerAlumno();
-  }
+  obtenerAlumno();
 
   const eliminarAlumno = async (id) => {
     try {
@@ -82,16 +86,10 @@ export default function Tablas() {
 
   return (
     <>
-      <Stack direction={{ base: "column", md: "row" }} spacing={4}>
-        <Button onClick={onOpen} colorScheme="blue">
-          Insertar Alumno
-        </Button>
 
-        <Button onClick={onOpen} colorScheme="blue">
-          Agregar Asignacion
-        </Button>
-      </Stack>
-
+      <Button onClick={onOpen} colorScheme="blue">
+        Insertar Alumno
+      </Button>
 
       <Modal
         initialFocusRef={initialRef}
@@ -100,42 +98,44 @@ export default function Tablas() {
         onClose={onClose}
       >
         <ModalOverlay />
-        <ModalContent as="form" onSubmit={handleClick}>
-          <ModalHeader>Registrar alumno</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Nombre: </FormLabel>
-              <Input
-                ref={initialRef}
-                name="nombre_alumno"
-                onChange={handleChange}
-              />
-            </FormControl>
+        <form onSubmit={handleClick}>
+          <ModalContent>
+            <ModalHeader>Registrar alumno</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={6}>
+              <FormControl>
+                <FormLabel>Nombre: </FormLabel>
+                <Input
+                  ref={initialRef}
+                  name="nombre_alumno"
+                  onChange={handleChange}
+                />
+              </FormControl>
 
-            <FormControl>
-              <FormLabel>Apellido: </FormLabel>
-              <Input name="apellido_alumno" onChange={handleChange} />
-            </FormControl>
+              <FormControl>
+                <FormLabel>Apellido: </FormLabel>
+                <Input name="apellido_alumno" onChange={handleChange} />
+              </FormControl>
 
-            <FormControl>
-              <FormLabel>Fecha nacimiento: </FormLabel>
-              <Input name="fecha_nacimiento" onChange={handleChange} />
-            </FormControl>
+              <FormControl>
+                <FormLabel>Fecha nacimiento: </FormLabel>
+                <Input name="fecha_nacimiento" onChange={handleChange} />
+              </FormControl>
 
-            <FormControl>
-              <FormLabel>Direccion</FormLabel>
-              <Input name="direccion" onChange={handleChange} />
-            </FormControl>
-          </ModalBody>
+              <FormControl>
+                <FormLabel>Direccion</FormLabel>
+                <Input name="direccion" onChange={handleChange} />
+              </FormControl>
+            </ModalBody>
 
-          <ModalFooter>
-            <Button type="submit" colorScheme="blue" mr={3} onClick={onClose}>
-              Guardar
-            </Button>
-            <Button onClick={onClose}>Cancelar</Button>
-          </ModalFooter>
-        </ModalContent>
+            <ModalFooter>
+              <Button type="submit" colorScheme="blue" mr={3}>
+                Guardar
+              </Button>
+              <Button onClick={onClose}>Cancelar</Button>
+            </ModalFooter>
+          </ModalContent>
+        </form>
       </Modal>
 
       <TableContainer>
@@ -147,8 +147,8 @@ export default function Tablas() {
               <Th>Apellidos</Th>
               <Th>Fecha Nacimiento</Th>
               <Th>Domicilio</Th>
-              <Th>Editar</Th>
               <Th>Eliminar</Th>
+              <Th>Editar</Th>
             </Tr>
           </Thead>
 
@@ -186,5 +186,11 @@ export default function Tablas() {
         </Table>
       </TableContainer>
     </>
-  );
+  )
 }
+
+
+
+
+
+
