@@ -6,6 +6,7 @@ import SidebarAdmin from "./components/DashboardAdmin";
 import SidebarAlumno from "./components/DashboardAlumno";
 import SidebarDocente from "./components/DashboardDocente";
 import TableAlumno from "./components/pages/GestionAlumno";
+import TableMestro from"./components/pages/GestionMaestro";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/alumno" element={<SidebarAlumno />} />
         <Route path="/docente" element={<SidebarDocente />} />
         <Route path="/alumnos" element={<TableAlumno/>} />
+        <Route path="/maestros" element={<TableMestro/>} />
       </Routes>
     </BrowserRouter>
   );

@@ -31,7 +31,7 @@ import {
   FiUsers,
   FiUser,
 } from "react-icons/fi";
-import Tablas from "../TablasAlumnos";
+import Tablas from "../TablaMaestros";
 
 const LinkItems = [
   { name: "Alumnos", icon: FiUsers },

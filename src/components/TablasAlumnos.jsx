@@ -7,7 +7,8 @@ import {
   Td,
   TableContainer,
   Button,
-  Flex
+  Flex,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import React from "react";
@@ -17,15 +18,13 @@ import ModalForm from "./ModalForm";
 
 export default function Tablas() {
   const [alumnos, setAlumnos] = useState([]);
+  const { onClose, onOpen } = useDisclosure();
 
   //setear los datos que se agreguen a los inputs
   const handleChange = (e) => {
     setDatos({ ...datos, [e.target.name]: e.target.value });
+    console.log(datos);
   };
-
-  useEffect(() => {
-    console.log("Actualizado");
-  }, [alumnos]);
 
   const [datos, setDatos] = useState({
     nombre_alumno: "",
@@ -51,7 +50,7 @@ export default function Tablas() {
 
     try {
       const response = await axios.post("http://localhost:3000/alumno", values);
-      console.log(response.data);
+      onClose();
       obtenerAlumno();
     } catch (error) {
       console.log("Error al insertar", error);
@@ -60,7 +59,6 @@ export default function Tablas() {
 
   const eliminarAlumno = async (id) => {
     try {
-      console.log(id);
       const eliminar = await axios.delete(`http://localhost:3000/alumno/${id}`);
     } catch (error) {
       console.log(`error al eliminar ${id}`, error);
@@ -73,11 +71,13 @@ export default function Tablas() {
   }, []);
 
   return (
-    <Flex direction={"column"} align={"center"} justify={"center"} >
+    <Flex direction={"column"} align={"center"} justify={"center"}>
       <ModalForm
         handleSubmit={handleClick}
         handleChangeData={handleChange}
         content="Registrar Alumno"
+        margen="10"
+        colorEsquema="blue"
       >
         Insertar Alumno
       </ModalForm>
@@ -115,12 +115,48 @@ export default function Tablas() {
                 </Td>
                 <Td>
                   {
-                    <Button
-                      colorScheme="gray"
-                      onClick={() => console.log("Editando")}
+                    <ModalForm
+                      colorEsquema="blue"
+                      insertar={function () {
+                        console.log("Desde edit");
+                        setDatos({
+                          nombre_alumno: alumno.nombre_alumno,
+                          apellido_alumno: alumno.apellido_alumno,
+                          fecha_nacimiento: alumno.apellido_alumno,
+                          direccion: alumno.direccion,
+                        });
+
+                        console.log(datos);
+                      }}
+                      margen="0"
+                      nombre={alumno.nombre_alumno}
+                      apellido={alumno.apellido_alumno}
+                      fecha_nacimiento={alumno.fecha_nacimiento}
+                      direccion={alumno.direccion}
+                      handleSubmit={async (e) => {
+                        e.preventDefault();
+
+                        try {
+                          const response = await axios.put(
+                            `http://localhost:3000/alumno/${alumno.alumno_id}`,
+                            {
+                              nombre_alumno: datos.nombre_alumno,
+                              apellido_alumno: datos.apellido_alumno,
+                              fecha_nacimiento: datos.fecha_nacimiento,
+                              direccion: datos.direccion,
+                            }
+                          );
+
+                          obtenerAlumno();
+                        } catch (error) {
+                          console.log("error al actualizar el alumno");
+                        }
+                      }}
+                      content={`Editando alumno con id: ${alumno.alumno_id}`}
+                      handleChangeData={handleChange}
                     >
                       Editar
-                    </Button>
+                    </ModalForm>
                   }
                 </Td>
               </Tr>

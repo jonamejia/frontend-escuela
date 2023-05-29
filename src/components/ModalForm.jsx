@@ -22,7 +22,12 @@ export default function ModalButton(props) {
 
   return (
     <>
-      <Button onClick={onOpen} colorScheme="blue" mb={10}>
+      <Button
+        onClick={props.insertar}
+        onDoubleClick={onOpen}
+        colorScheme={props.colorEsquema}
+        mb={props.margen}
+      >
         {props.children}
       </Button>
 
@@ -43,23 +48,36 @@ export default function ModalButton(props) {
                 <Input
                   ref={initialRef}
                   name="nombre_alumno"
+                  defaultValue={props.nombre}
                   onChange={props.handleChangeData}
                 />
               </FormControl>
 
               <FormControl>
                 <FormLabel>Apellido: </FormLabel>
-                <Input name="apellido_alumno" onChange={props.handleChangeData} />
+                <Input
+                  name="apellido_alumno"
+                  defaultValue={props.apellido}
+                  onChange={props.handleChangeData}
+                />
               </FormControl>
 
               <FormControl>
                 <FormLabel>Fecha nacimiento: </FormLabel>
-                <Input name="fecha_nacimiento" onChange={props.handleChangeData} />
+                <Input
+                  name="fecha_nacimiento"
+                  defaultValue={props.fecha_nacimiento}
+                  onChange={props.handleChangeData}
+                />
               </FormControl>
 
               <FormControl>
                 <FormLabel>Direccion</FormLabel>
-                <Input name="direccion" onChange={props.handleChangeData} />
+                <Input
+                  name="direccion"
+                  defaultValue={props.direccion}
+                  onChange={props.handleChangeData}
+                />
               </FormControl>
             </ModalBody>
 
