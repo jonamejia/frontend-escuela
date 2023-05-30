@@ -8,135 +8,86 @@ import {
     Td,
     Tbody,
     Button,
-    Flex
+    Flex,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalCloseButton,
+    ModalBody
 } from "@chakra-ui/react";
-import ModalHorarios from "./ModalHorarios";
 
 export default function TablasHorarios() {
-    const [horarios, setHorarios] = useState([]);
-
-    const [datos, setDatos] = useState({
-        dia_semana: "",
-        hora_inicio: "",
-        hora_fin: "",
-        curso: ""
-    });
-
-    const obtenerHorarios = async () => {
-        try {
-            const res = await axios.get("http://localhost:3000/horarios");
-            const data = res.data;
-            setHorarios(data);
-        } catch (error) {
-            console.log("Error al obtener el horario", error);
-        }
-    };
-
-    const handleChange = (e) => {
-        setDatos({ ...datos, [e.target.name]: e.target.value });
-        console.log(datos);
-    };
-
-    const handleClick = async (e) => {
-        e.preventDefault();
-        const values = {
-            dia_semana: datos.dia_semana,
-            hora_inicio: datos.hora_inicio,
-            hora_fin: datos.hora_fin,
-            curso: datos.curso
-        };
-
-        try {
-            const response = await axios.post("http://localhost:3000/horarios", values);
-            obtenerHorarios();
-        } catch (error) {
-            console.log("Error al insertar", error);
-        }
-    };
-
-    const eliminarHorario = async (id) => {
-        try {
-            await axios.delete(`http://localhost:3000/horarios/${id}`);
-            obtenerHorarios();
-        } catch (error) {
-            console.log(`Error al eliminar ${id}`, error);
-        }
-    };
-
-    useEffect(() => {
-        obtenerHorarios();
-    }, []);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const initialRef = React.useRef(null);
+    const finalRef = React.useRef(null);
 
     return (
-        <Flex direction="column" align="center" justify="center">
-            <Table variant="simple">
-                <Thead>
-                    <Tr>
-                        <Th>Día</Th>
-                        <Th>Hora de inicio</Th>
-                        <Th>Hora de fin</Th>
-                        <Th></Th>
-                        <Th></Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {horarios.map((horario) => (
-                        <Tr key={horario.id}>
-                            <Td>{horario.dia}</Td>
-                            <Td>{horario.horaInicio}</Td>
-                            <Td>{horario.horaFin}</Td>
-                            <Td>
-                                <Button
-                                    colorScheme="red"
-                                    onClick={() => eliminarHorario(horario.horario_id)}
-                                >
-                                    Eliminar
-                                </Button>
-                            </Td>
-                            <Td>
-                                <ModalHorarios
-                                    colorEsquema="blue"
-                                    insertar={() => {
-                                        console.log("Desde edit");
-                                        setDatos({
-                                            dia_semana: horario.dia,
-                                            hora_inicio: horario.horaInicio,
-                                            hora_fin: horario.horaFin,
-                                            curso: horario.curso
-                                        });
-                                        console.log(datos);
-                                    }}
-                                    margen="0"
-                                    nombre_curso={horario.curso}
-                                    descripcion=""
-                                    handleSubmit={async (e) => {
-                                        e.preventDefault();
-                                        try {
-                                            const response = await axios.put(
-                                                `http://localhost:3000/horarios/${horario.horario_id}`,
-                                                {
-                                                    dia_semana: datos.dia_semana,
-                                                    hora_inicio: datos.hora_inicio,
-                                                    hora_fin: datos.hora_fin,
-                                                    curso: datos.curso
-                                                }
-                                            );
-                                            obtenerHorarios();
-                                        } catch (error) {
-                                            console.log("Error al actualizar el horario", error);
-                                        }
-                                    }}
-                                    content={`Editando horario con id: ${horario.horario_id}`}
-                                    handleChangeData={handleChange}
-                                    datos={datos}
-                                >
-                                    Editar
-                                </ModalHorarios>
-                            </Td>
-                        </Tr>
-                    ))}
-                </Tbody>
-            </Table>
-        </Flex>
+        <>
+            <Button
+                onClick={props.insertar}
+                onDoubleClick={onOpen}
+                colorScheme={porps.colorEsquema}
+                mb={props.margen}
+            >
+                {props.children}
+            </Button>
+
+            <Modal
+                initialFocusRef={initialRef}
+                finalFocusRef={finalRef}
+                isOpen={isOpen}
+                onClose={onClose}
+            >
+                <ModalOverlay />
+                <form onSubmit={props.handleSubmit}>
+                    <ModalContent>
+                        <ModalHeader>{props.Content}</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody pb={6}>
+                            <FormControl>
+                                <FormLabel>Dia: </FormLabel>
+                                <Input
+                                    ref={initialRef}
+                                    name="dia_semana"   
+                                    defaultValue={props.dia}
+                                    onChange={props.handleChangeData}
+                                />
+                            </FormControl>
+
+                            <FormControl>
+                                <FormLabel>Hora Inicio: </FormLabel>
+                                <Input
+                                    ref={initialRef}
+                                    name="hora_inicio"   
+                                    defaultValue={props.hora_inicio}
+                                    onChange={props.handleChangeData}
+                                />
+                            </FormControl>
+
+                            <FormControl>
+                                <FormLabel>Hora Fin: </FormLabel>
+                                <Input
+                                    ref={initialRef}
+                                    name="hora_fin"   
+                                    defaultValue={props.hora_fin}
+                                    onChange={props.handleChangeData}
+                                />
+                            </FormControl>
+
+                            <FormControl>
+                                <FormLabel>Curso: </FormLabel>
+                                <Input
+                                    ref={initialRef}
+                                    name="curso"   
+                                    defaultValue={props.curso_id}
+                                    onChange={props.handleChangeData}
+                                />
+                            </FormControl>
+                        </ModalBody>
+                    </ModalContent>
+                </form>
+            </Modal>
+        </>
     );
 }

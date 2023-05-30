@@ -17,7 +17,7 @@ export default function TablasHorarios() {
 
     const fetchHorarios = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/horarios"); // Reemplaza con la URL correcta de tu servidor local
+            const response = await axios.get("http://localhost:3000/horario"); // Reemplaza con la URL correcta de tu servidor local
             const data = response.data;
             setHorarios(data);
         } catch (error) {
@@ -27,7 +27,7 @@ export default function TablasHorarios() {
 
     const eliminarHorario = async (id) => {
         try {
-            await axios.delete(`http://localhost:3000/horarios/${id}`);
+            await axios.delete(`http://localhost:3000/horario/${id}`);
         } catch (error) {
             console.log(`Error al eliminar ${id}`, error);
         }
@@ -46,7 +46,7 @@ export default function TablasHorarios() {
                         <Th>Día</Th>
                         <Th>Hora de inicio</Th>
                         <Th>Hora de fin</Th>
-                        <Th></Th>
+                        <Th>Curso</Th>
                         <Th></Th>
                     </Tr>
                 </Thead>
@@ -79,12 +79,12 @@ export default function TablasHorarios() {
                                     }}
                                     margen="0"
                                     nombre_curso={horario.curso}
-                                    descripcion=""
+                                    descripcion={horario.descripcion}
                                     handleSubmit={async (e) => {
                                         e.preventDefault();
                                         try {
                                             const response = await axios.put(
-                                                `http://localhost:3000/horarios/${horario.horario_id}`,
+                                                `http://localhost:3000/horario/${horario.horario_id}`,
                                                 {
                                                     dia_semana: datos.dia_semana,
                                                     hora_inicio: datos.hora_inicio,
