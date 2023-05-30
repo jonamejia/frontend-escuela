@@ -78,15 +78,15 @@ export default function Tablas() {
   return (
     <Flex direction={"column"} align={"center"} justify={"center"}>
 
-      <ModalForm 
-       colorEsquema="blue"
-       handleSubmit={handleClick}
-       handleChangeData={handleChange}
-       margen={10}
+      <ModalForm
+        colorEsquema="blue"
+        handleSubmit={handleClick}
+        handleChangeData={handleChange}
+        margen={10}
       >
         Insertar Maestro
       </ModalForm>
-      
+
       <TableContainer>
         <Table variant="striped" colorScheme={"teal"}>
           <Thead>

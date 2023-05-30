@@ -1,5 +1,5 @@
 import React from "react";
-import {Link as RouterLink} from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import {
     Button,
     Flex,
@@ -56,7 +56,9 @@ export default function HomeAdmin() {
                             color={"white"}
                             _hover={{
                                 bg: "blue.500"
-                            }}>Gestionar Docentes</Button>
+                            }}>
+                            <RouterLink to="/Maestros">Gestionar Docentes</RouterLink>
+                        </Button>
                     </Stack>
                 </Stack>
             </Flex>
