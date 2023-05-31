@@ -130,6 +130,7 @@ export default function Tablas() {
               <Th>Apellidos</Th>
               <Th>Fecha Nacimiento</Th>
               <Th>Domicilio</Th>
+              <Th>Grado</Th>
               <Th>Eliminar</Th>
               <Th>Editar</Th>
             </Tr>
@@ -144,6 +145,7 @@ export default function Tablas() {
                   <Td>{alumno.apellido_alumno}</Td>
                   <Td>{alumno.fecha_nacimiento}</Td>
                   <Td>{alumno.direccion}</Td>
+                  <Td>{alumno.grado_seccion}</Td>
                   <Td>
                     {
                       <Button

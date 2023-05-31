@@ -47,6 +47,7 @@ export default function TablasHorarios() {
             <Th>ID</Th>
             <Th>Nombre Materia</Th>
             <Th>Descripcion</Th>
+            <Th>Profesor</Th>
             <Th>Agregar Curso</Th>
           </Tr>
         </Thead>
@@ -56,6 +57,7 @@ export default function TablasHorarios() {
               <Td>{curso.curso_id}</Td>
               <Td>{curso.nombre_curso}</Td>
               <Td>{curso.descripcion}</Td>
+              <Td>{curso.profesor_asignado}</Td>
               <Td>{<ModalAlumnoCurso Curso={curso.curso_id} nombreCurso={curso.nombre_curso}/>}</Td>
             </Tr>
           ))}

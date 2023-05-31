@@ -10,16 +10,18 @@ import {
     Button,
     Flex
 } from "@chakra-ui/react";
-import ModalHorarios from "./ModalHorarios";
+import ModalHorario from "./ModalHorarios";
+import ModalAlumnoCurso from "./ModalAlumnoCurso";
 
-export default function TablasHorarios() {
-    const [horarios, setHorarios] = useState([]);
+export default function TablaHorario() {
+    const [horario, setHorario] = useState([]);
 
-    const fetchHorarios = async () => {
+    const fetchHorario = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/horario"); // Reemplaza con la URL correcta de tu servidor local
+            const response = await axios.get("http://localhost:3000/horarios"); // Reemplaza con la URL correcta de tu servidor local
             const data = response.data;
-            setHorarios(data);
+            console.log(data);
+            setHorario(data);
         } catch (error) {
             console.log("Error al obtener el horario", error);
         }
@@ -27,15 +29,15 @@ export default function TablasHorarios() {
 
     const eliminarHorario = async (id) => {
         try {
-            await axios.delete(`http://localhost:3000/horario/${id}`);
+            await axios.delete(`http://localhost:3000/horarios/${id}`);
         } catch (error) {
             console.log(`Error al eliminar ${id}`, error);
         }
-        fetchHorarios();
+        fetchHorario();
     };
 
     useEffect(() => {
-        fetchHorarios();
+        fetchHorario();
     }, []);
 
     return (
@@ -44,21 +46,22 @@ export default function TablasHorarios() {
                 <Thead>
                     <Tr>
                         <Th>Día</Th>
+                        <Th>Materia</Th>
                         <Th>Hora de inicio</Th>
-                        <Th>Hora de fin</Th>
+                        <Th>Hora de fin</Th>    
                         <Th>Curso</Th>
-                        <Th></Th>
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {horarios.map((horario) => (
-                        <Tr key={horario.horario_id}>
-                            <Td>{horario.dia_semana}</Td>
-                            <Td>{horario.hora_inicio}</Td>
-                            <Td>{horario.hora_fin}</Td>
-                            <Td>{horario.curso_id}</Td>
-                        </Tr>
-                    ))}
+                    {horario &&
+                        horario.map((horario_curso_alumno) => (
+                            <Tr key={horario_curso_alumno.id}>
+                                <Td>{horario_curso_alumno.horario_id}</Td>
+                                <Td>{horario_curso_alumno.curso_id}</Td>
+                                <td>{horario_curso_alumno.alumno_id}</td>
+                                <td>{horario_curso_alumno.maestro_id}</td>                            
+                            </Tr>
+                        ))}
                 </Tbody>
             </Table>
         </Flex>

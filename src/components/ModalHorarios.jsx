@@ -7,11 +7,25 @@ import {
     ModalCloseButton,
     ModalBody
 } from "@chakra-ui/react";
+import axios from "axios";
+import { useState } from "react";
 
-export default function TablasHorarios() {
+export default function ModalHorario() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const initialRef = React.useRef(null);
     const finalRef = React.useRef(null);
+
+    const [horarios_alumno, setHorario_alumno] = useState ([]);
+
+    const obtenerHorario = async () => {
+        try{
+            const res = await axios.get("http://localhost:3000/horarios");
+            const data = res.data;
+            setHorario_alumno(data);
+        } catch (error){
+            console.log("error al obtener la data de los horarios:", error)
+        }
+    }
 
     return (
         <>
