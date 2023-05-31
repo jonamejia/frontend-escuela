@@ -52,57 +52,11 @@ export default function TablasHorarios() {
                 </Thead>
                 <Tbody>
                     {horarios.map((horario) => (
-                        <Tr key={horario.id}>
-                            <Td>{horario.dia}</Td>
-                            <Td>{horario.horaInicio}</Td>
-                            <Td>{horario.horaFin}</Td>
-                            <Td>
-                                <Button
-                                    colorScheme="red"
-                                    onClick={() => eliminarHorario(horario.horario_id)}
-                                >
-                                    Eliminar
-                                </Button>
-                            </Td>
-                            <Td>
-                                <ModalHorarios
-                                    colorEsquema="blue"
-                                    insertar={() => {
-                                        console.log("Desde edit");
-                                        setDatos({
-                                            dia_semana: horario.dia,
-                                            hora_inicio: horario.horaInicio,
-                                            hora_fin: horario.horaFin,
-                                            curso: horario.curso
-                                        });
-                                        console.log(datos);
-                                    }}
-                                    margen="0"
-                                    nombre_curso={horario.curso}
-                                    descripcion={horario.descripcion}
-                                    handleSubmit={async (e) => {
-                                        e.preventDefault();
-                                        try {
-                                            const response = await axios.put(
-                                                `http://localhost:3000/horario/${horario.horario_id}`,
-                                                {
-                                                    dia_semana: datos.dia_semana,
-                                                    hora_inicio: datos.hora_inicio,
-                                                    hora_fin: datos.hora_fin,
-                                                    curso: datos.curso
-                                                }
-                                            );
-                                            fetchHorarios();
-                                        } catch (error) {
-                                            console.log("Error al actualizar el horario", error);
-                                        }
-                                    }}
-                                    content={`Editando horario con id: ${horario.horario_id}`}
-                                    handleChangeData={handleChange}
-                                >
-                                    Editar
-                                </ModalHorarios>
-                            </Td>
+                        <Tr key={horario.horario_id}>
+                            <Td>{horario.dia_semana}</Td>
+                            <Td>{horario.hora_inicio}</Td>
+                            <Td>{horario.hora_fin}</Td>
+                            <Td>{horario.curso_id}</Td>
                         </Tr>
                     ))}
                 </Tbody>

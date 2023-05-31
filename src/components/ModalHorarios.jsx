@@ -1,14 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
 import {
-    Table,
-    Thead,
-    Th,
-    Tr,
-    Td,
-    Tbody,
     Button,
-    Flex,
     Modal,
     ModalOverlay,
     ModalContent,
@@ -25,8 +16,7 @@ export default function TablasHorarios() {
     return (
         <>
             <Button
-                onClick={props.insertar}
-                onDoubleClick={onOpen}
+                onClick={onOpen}
                 colorScheme={porps.colorEsquema}
                 mb={props.margen}
             >
