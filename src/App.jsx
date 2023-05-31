@@ -8,6 +8,7 @@ import SidebarDocente from "./components/DashboardDocente";
 import TableAlumno from "./components/pages/GestionAlumno";
 import TableMaestro from"./components/pages/GestionMaestro";
 import TableHorario from "./components/pages/GestionHorario";
+import TableCursos from "./components/pages/GestionCursos";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/alumnos" element={<TableAlumno/>} />
         <Route path="/maestros" element={<TableMaestro/>} />
         <Route path="/horarios" element={<TableHorario/>} />
+        <Route path="/cursos" element={<TableCursos/>} />
       </Routes>
     </BrowserRouter>
   );
